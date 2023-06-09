@@ -45,4 +45,12 @@ LOAD DATA LOCAL INPATH 'data1.csv' INTO TABLE tbl1;
 /*
     >>> Escriba su respuesta a partir de este punto <<<
 */
+INSERT OVERWRITE DIRECTORY 'output'
+ROW FORMAT DELIMITED FIELDS TERMINATED BY ','
 
+SELECT tbl0.c1, tbl0.c2, c.number
+FROM tbl0
+INNER JOIN (SELECT c1, c2, number
+        FROM tbl1 
+        LATERAL VIEW EXPLODE(c4) tbl1 AS c2,number) c
+ON tbl0.c1 = c.c1 AND tbl0.c2 = c.c2;

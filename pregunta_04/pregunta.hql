@@ -44,3 +44,12 @@ LOAD DATA LOCAL INPATH 'data1.csv' INTO TABLE tbl1;
 /*
     >>> Escriba su respuesta a partir de este punto <<<
 */
+INSERT OVERWRITE DIRECTORY 'output'
+ROW FORMAT DELIMITED FIELDS TERMINATED BY ','
+
+SELECT
+    exploded_value
+FROM tbl0
+LATERAL VIEW EXPLODE(c5) tbl_exploded AS exploded_value
+GROUP BY exploded_value
+ORDER BY exploded_value;
