@@ -17,7 +17,7 @@ DROP TABLE IF EXISTS tbl1;
 
 CREATE TABLE tbl1 (
 letter STRING,
-date DATE,
+dates DATE,
 value INT
 )
 ROW FORMAT DELIMITED
